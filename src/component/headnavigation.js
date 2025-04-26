@@ -36,7 +36,6 @@ const Headnavigation = () => {
                     <View style={styles.searchresultouter}>
                         <FlatList style={styles.searchresultinner}
                             data={prod}
-                            nestedScrollEnabled={true}
                             renderItem={({ item }) => {
                                 if (search && item.product_name.toLowerCase().includes(search.toLocaleLowerCase())) {
                                     return (

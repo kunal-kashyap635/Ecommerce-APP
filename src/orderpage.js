@@ -2,20 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
 import { myip } from '@/myip';
 import axios from 'axios';
-import { odd } from '@/atom/reciolatom';
-import { useRecoilState } from 'recoil';
+import * as SecureStore from 'expo-secure-store';
 
 const Orderpage = ({ route }) => {
-
-    // recoil hook to store data so we use data globally in any component
-    const [ono, setOno] = useRecoilState(odd);
 
     // fetching orderid through route
     const order_id = route?.params?.orderid;
 
-    useEffect(() => {
-        setOno(order_id); // ✅ State update inside effect
-    }, []);
+    // function saving order id in secure store
+    const saveOrderid = async (orderid) => {
+        try {
+            await SecureStore.setItemAsync('order_id', orderid);
+        } catch (error) {
+            console.error('Error saving order data:', error);
+        }
+    }
+    useEffect(()=>{
+        saveOrderid(order_id)
+    },[order_id])
 
     // hook to store value received from server
     const [orderid, setOrderid] = useState('');

@@ -24,8 +24,3 @@ export const wishlist = atom({
     key: 'wishlist',
     default: [], // Start with an empty array for the wishlist
 });
-
-export const odd = atom({
-    key: 'odd',
-    default: '',
-});
